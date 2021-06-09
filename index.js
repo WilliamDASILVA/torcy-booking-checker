@@ -7,7 +7,9 @@ const FormData = require('form-data')
 exports.handle = async function(event, context) {
   const client = new discord.Client()
 
-  await client.login(process.env.DISCORD_TOKEN)
+  console.log('Handle ran.')
+
+  client.login(process.env.DISCORD_TOKEN)
 
   return new Promise((resolve, reject) => {
     client.once('ready', async () => {
@@ -27,9 +29,11 @@ exports.handle = async function(event, context) {
         data: formData
       })
         .then((response) => {
+          console.log('Request sent.')
           if (response.status === 200) {
             const hasInitalForm = response.data.includes('action="/booking/create/48803/0"')
             const valid = !response.data.includes('Il n\'existe plus de plage horaire libre pour votre demande')
+            console.log('Validity', hasInitalForm, valid)
             if (!hasInitalForm && valid) {
               channel.send('Un créneau semble disponible ! https://www.seine-et-marne.gouv.fr/booking/create/48803/2')
               client.destroy()
