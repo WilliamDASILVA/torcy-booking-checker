@@ -32,10 +32,10 @@ client.once('ready', async () => {
         const hasInitalForm = response.data.includes('action="/booking/create/48803/0"')
         const valid = !response.data.includes('Il n\'existe plus de plage horaire libre pour votre demande')
         console.log('Validity', hasInitalForm, valid)
-        if (!hasInitalForm && valid) {
-          await channel.send('Un créneau semble disponible ! https://www.seine-et-marne.gouv.fr/booking/create/48803/2')
-          await client.destroy()
-        }
+        // if (!hasInitalForm && valid) {
+        await channel.send('Un créneau semble disponible ! https://www.seine-et-marne.gouv.fr/booking/create/48803/2')
+        await client.destroy()
+        // }
         process.exit(0)
       }
     })
