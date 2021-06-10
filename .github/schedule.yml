@@ -1,0 +1,22 @@
+name: Notify when a slot is available
+on: push
+  # schedule:
+  #   - cron:  '* * * * *'
+
+jobs:
+  bundle-diff:
+    name: 'Notify availability'
+    runs-on: ubuntu-16.04
+    steps:
+    - name: Checkout head
+      uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+    - name: Install dependencies
+      run: npm ci
+    - name: Run
+      run: bash -c "npm start"
+      env:
+        DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+        DISCORD_CHANNEL_ID: ${{ secrets.DISCORD_CHANNEL_ID }}
