@@ -1,7 +1,7 @@
 name: Notify when a slot is available
 on:
-  schedule:
-    - cron: '*/6 * * * *'
+  # schedule:
+  #  - cron: '*/6 * * * *'
   push:
 
 jobs:
